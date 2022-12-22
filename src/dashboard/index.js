@@ -16,6 +16,22 @@ import Modal from '@mui/material/Modal';
 import Login from "../login";
 import { User } from "../context";
 import { SignUp } from "../signUp";
+import { deepOrange } from '@mui/material/colors';
+import HeroSection from "./Herosection";
+import Footer from "./Footer";
+import ProductShowcase from "./ProductShow/ProductShowCase";
+import FeelSpecial from "./ FeelSpecial/ FeelSpecialPage";
+import BrandsLove from "./BrandsLove/BrandsLovePage";
+import CredExperience from "./CredExperience/CredExperiencePage";
+import MobileScroll from "./MobileScroll/MobileScrollPage";
+import WindowPeak from "./WindowPeak/WindowPeak";
+import CredSecurity from "./CredSecurity/CredSecurityPage";
+import CredStory from "./CredStory/CredStoryPage";
+import AppRating from "./AppRating/AppRatingPage";
+import Header from "./Header/HeaderPage";
+import "../CommonCss/commonClasses.css"
+import "../CommonCss/animations.css"
+
 
 const style = {
     position: 'absolute',
@@ -36,6 +52,7 @@ const Dashboard= () =>{
 
     const list = () =>{
         return(
+           
             <Box
                 sx={{ width: 250 }}
                 role="presentation"
@@ -65,7 +82,7 @@ const Dashboard= () =>{
     return(
     <>
        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" >
+            <AppBar position="static" sx={{ backgroundColor:"#101010"}} >
                 <Toolbar>
                 <IconButton
                     size="large"
@@ -130,9 +147,25 @@ const Dashboard= () =>{
                 <SignUp setOpenLogin={setOpenLogin}/>
             </Box>
          </Modal>
-         
-        <img src="./screen.png" height='640px'/>
+        
+        <Header/>
+        <HeroSection/>
+        <ProductShowcase/>
+        <FeelSpecial/>
+        <BrandsLove/>
+        <CredExperience/>
+        <MobileScroll/>
+
+        <div className="non-mobile">
+        <WindowPeak />
+        </div>
+       
+        <CredSecurity/>
+        <CredStory/>
+        <AppRating/>
+        <Footer/>
         </>
+       
     )
 }
 
