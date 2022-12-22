@@ -9,19 +9,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { User } from '../context';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Copyright } from '../Copyright';
 
 const Login = (props) => {
   const [formItem, setFormItem] = useState({
@@ -31,7 +19,7 @@ const Login = (props) => {
   const userDetails = useContext(User);
   const handleSubmit = () => {
 
-   // make api call and set props.setUserDetails
+   // make api call and close modal
    props.setOpenLogin(false)
    userDetails.userData({
     userName:'abs',
