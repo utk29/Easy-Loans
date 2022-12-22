@@ -56,7 +56,6 @@ const data={
 const AdminDashboard = () =>{
     return(
        <>
-       hello
         <ResponsiveBar
           data={data.data}
           keys={["value"]}

@@ -16,13 +16,15 @@ const Login = (props) => {
     pass:''
   })
   const userDetails = useContext(User);
-  const handleSubmit = () => {
 
+  const handleSubmit = () => {
    // make api call and close modal
-   props.setOpenLogin(false)
+   props.setOpenLogin(false);
    userDetails.userData({
     userName:'abs',
-    email:'222'
+    email:'222',
+    phoneNumber:9999,
+    id:111
    })
   };
   const onChange = (name,e) =>{

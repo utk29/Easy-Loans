@@ -7,7 +7,8 @@ export const UserDetails = (props) =>{
 const [data, setData] = useState({
     userName:'',
     id:'',
-    email:''
+    email:'',
+    phoneNumber:''
 })
 
 const userData = (e) =>{

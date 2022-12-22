@@ -43,7 +43,8 @@ export const SignUp = (props) =>{
                     props.setOpenLogin(false);
                     userDetails.userData({
                         userName:obj.first_name,
-                        email:obj.email
+                        email:obj.email,
+                        phoneNumber:obj.phone_number
                     });
                   }
                 })

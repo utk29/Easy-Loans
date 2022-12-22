@@ -1,25 +1,28 @@
-import React, { useState } from "react"
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
-import Avatar from '@mui/material/Avatar';
-import Modal from '@mui/material/Modal';
-import "../../CommonCss/commonClasses.css"
-import "../../CommonCss/animations.css"
+import React, { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
+import Avatar from "@mui/material/Avatar";
+import Modal from "@mui/material/Modal";
+import "../../CommonCss/commonClasses.css";
+import "../../CommonCss/animations.css";
+import toast, { Toaster } from "react-hot-toast";
 
+import RadioGroup from "@mui/material/RadioGroup";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Login from "../../login";
+import Divider from "@mui/material/Divider";
 import { SignUp } from "../../signUp";
 import {
-    Checkbox,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
@@ -47,52 +50,51 @@ export const NavBar = (props) => {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [open, setOpen] = useState(false);
   const [employmentTypeMapping] = useState([
-    { value: "full_time", label: "Full Time" },
-    { value: "part_time", label: "Part Time" },
-    { value: "self_employed", label: "Self Time" },
-    { value: "un_employed", label: "Unemployed" },
-    { value: "others", label: "Others" },
-  ])
+    { value: "Full Time", label: "Full Time" },
+    { value: "Part Time", label: "Part Time" },
+    { value: "Self Time", label: "Self Employed" },
+    { value: "Unemployed", label: "Unemployed" },
+  ]);
   const [amountFinance, setAmountFinance] = useState("");
   const [annualIncome, setAnnualIncome] = useState("");
+  const [employmentType, setEmploymentType] = useState("Full Time");
 
-    const handleClick = (type) =>{
-        if(type === 'Log Out'){
-            sessionStorage.removeItem("user")
-            props.setRenderScreen('Home');
-        }if(type === 'Dashboard'){
-            props.setRenderScreen('UserDashboard');
-        }if(type === 'Home'){
-            props.setRenderScreen('Home');
-        }if(type === 'Adim Dashboard'){
-            props.setRenderScreen('Adim Dashboard');
-        }
-        if(type == 'Apply For Easy EMI'){
-            setOpen(true)
-        }
-        setSideBar(false);
+  const handleClick = (type) => {
+    if (type === "Log Out") {
+      sessionStorage.removeItem("user");
+      props.setRenderScreen("Home");
     }
-
-
-    const findItems = () =>{
-        let arr= ['Home','Apply For Easy EMI']
-        let userObj = JSON.parse(sessionStorage.getItem('user'));
-       // if(userObj.isAdmin){
-            arr.push('Adim Dashboard');
-      //  }
-       // if(userObj.isVerified){
-            arr.push('Dashboard');
-       // }
-       arr.push('Log Out')
-        return arr??[];
+    if (type === "Dashboard") {
+      props.setRenderScreen("UserDashboard");
     }
+    if (type === "Home") {
+      props.setRenderScreen("Home");
+    }
+    if (type === "Adim Dashboard") {
+      props.setRenderScreen("Adim Dashboard");
+    }
+    if (type === "Apply For Easy EMI") {
+      setOpen(true);
+    }
+    setSideBar(false);
+  };
+
+  const findItems = () => {
+    let arr = ["Home", "Apply For Easy EMI"];
+    let userObj = JSON.parse(sessionStorage.getItem("user"));
+    // if(userObj.isAdmin){
+    arr.push("Adim Dashboard");
+    //  }
+    // if(userObj.isVerified){
+    arr.push("Dashboard");
+    // }
+    arr.push("Log Out");
+    return arr ?? [];
+  };
 
   const list = () => {
     return (
-      <Box
-        sx={{ width: 250 }}
-        role="presentation"
-      >
+      <Box sx={{ width: 250 }} role="presentation">
         <List>
           {findItems().map((text) => (
             <ListItem key={text} disablePadding>
@@ -114,10 +116,28 @@ export const NavBar = (props) => {
     }
   };
 
-  const handleAmountFinanceInput =(e)=>{
-    setAmountFinance(e.target.value)
-  }
+  const handleAmountFinanceInput = (e) => {
+    setAmountFinance(e.target.value);
+  };
 
+  const handleSubmit = () => {
+    const obj = {
+      phone_no: JSON.parse(sessionStorage.getItem("user")).phoneNumber,
+      loanAmount: amountFinance,
+      id: JSON.parse(sessionStorage.getItem("user")).id,
+      annualIncome: annualIncome,
+      employmentType: employmentType,
+      addhar_url: "addhar.com",
+      pan_url: "pan.com",
+      income_proof: "incom.com",
+    };
+    setOpen(false);
+    toast.success('Request Successfully Submit!')
+  };
+
+  const handleRadioButton = (e) => {
+    setEmploymentType(e.target.value);
+  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -213,7 +233,7 @@ export const NavBar = (props) => {
             },
           }}
         >
-          <DialogTitle sx={{ fontWeight:"500"}}>Apply Easy EMI</DialogTitle>
+          <DialogTitle sx={{ fontWeight: "500" }}>Apply Easy EMI</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description"></DialogContentText>
             <Box
@@ -228,87 +248,105 @@ export const NavBar = (props) => {
                 onChange={handleAmountFinanceInput}
                 size="small"
                 label="Amount you want to finance (approx)"
-                
               />
               <Box sx={{ marginTop: "10px" }}>
-                {employmentTypeMapping?.map((radio, index) => (
-                  <FormControlLabel
-                    control={
-                      <Radio
-                        value={radio?.value}
-                        // checked={radio}
-                      />
-                    }
-                    label={radio?.label}
-                  />
-                ))}
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={employmentType}
+                  onChange={(e) => handleRadioButton(e)}
+                >
+                  {employmentTypeMapping?.map((radio, index) => (
+                    <FormControlLabel
+                      control={<Radio value={radio?.value} />}
+                      label={radio?.label}
+                    />
+                  ))}
+                </RadioGroup>
               </Box>
               <TextField
-              value={annualIncome}
-              onChange={(event)=> setAnnualIncome(event.target.value)}
+                value={annualIncome}
+                onChange={(event) => setAnnualIncome(event.target.value)}
                 sx={{ marginTop: "10px" }}
                 size="small"
                 label="Your gross annual income (approx)"
               />
-            <Box className="p-3 d-flex align-items-center" border={1} borderColor={"darkgrey"} marginTop={"18px"} padding={"3px"}>
-                <span style={{fontSize:"20px", fontWeight:"420"}}>Aadhar</span>
-                  <Button variant="contained" component="label" sx={{marginLeft:"8rem"}} >
-                    Browse File
-                    <input
-                      type="file"
-                      
-                      hidden
-                      
-                    />
-                  </Button>
-                  
-                </Box>
-
-                <Box className="p-3 d-flex align-items-center" border={1} borderColor={"darkgrey"} marginTop={"10px"} padding={"3px"}>
-                <span style={{fontSize:"20px", fontWeight:"420"}}>PAN No.</span>
-                  <Button variant="contained" component="label" sx={{marginLeft:"8rem"}} >
-                    Browse File
-                    <input
-                      type="file"
-                      
-                      hidden
-                      
-                    />
-                  </Button>
-                  
-                </Box>
-
-                <Box className="p-3 d-flex align-items-center" border={1} borderColor={"darkgrey"} marginTop={"10px"} padding={"3px"}>
-                <span style={{fontSize:"20px", fontWeight:"420"}}>Income Proof</span>
-                  <Button variant="contained" component="label" sx={{marginLeft:"87px"}} >
-                    Browse File
-                    <input
-                      type="file"
-                      
-                      hidden
-                    
-                    />
-                  </Button>
-                  
-                </Box>
-
-                <FormControlLabel sx={{ marginTop:"20px"}}
-                    control={
-                          <Checkbox
-
-                          />
-                        }
-                        label={"I hereby authorize Easy Loans to generate & check my Cibil Report"}
-                      />
-
-            
+              <Box
+                className="p-3 d-flex align-items-center"
+                borderColor={"darkgrey"}
+                marginTop={"18px"}
+                padding={"10px"}
+              >
+                <span style={{ fontSize: "20px", fontWeight: "420" }}>
+                  Aadhar
+                </span>
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{ marginLeft: "8rem" }}
+                >
+                  Browse File
+                  <input type="file" hidden />
+                </Button>
+              </Box>
+              <Divider />
+              <Box
+                className="p-3 d-flex align-items-center"
+                borderColor={"darkgrey"}
+                marginTop={"10px"}
+                padding={"10px"}
+              >
+                <span style={{ fontSize: "20px", fontWeight: "420" }}>
+                  PAN No.
+                </span>
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{ marginLeft: "8rem" }}
+                >
+                  Browse File
+                  <input type="file" hidden />
+                </Button>
+              </Box>
+              <Divider />
+              <Box
+                className="p-3 d-flex align-items-center"
+                borderColor={"darkgrey"}
+                marginTop={"10px"}
+                padding={"10px"}
+              >
+                <span style={{ fontSize: "20px", fontWeight: "420" }}>
+                  Income Proof
+                </span>
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{ marginLeft: "87px" }}
+                >
+                  Browse File
+                  <input type="file" hidden />
+                </Button>
+              </Box>
+              <Divider />
+              <FormControlLabel
+                sx={{ marginTop: "20px" }}
+                control={<Checkbox />}
+                label={
+                  "I hereby authorize Easy Loans to generate & check my Cibil Report"
+                }
+              />
             </Box>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpen(false)} variant="text" >CANCEL</Button>
-            <Button onClick={()=> setOpen(false)} variant="text" >SUBMIT</Button>
+            <Button onClick={() => setOpen(false)} variant="text">
+              CANCEL
+            </Button>
+            <Button onClick={() => handleSubmit()} variant="text">
+              SUBMIT
+            </Button>
           </DialogActions>
         </Dialog>
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
     </>
   );
