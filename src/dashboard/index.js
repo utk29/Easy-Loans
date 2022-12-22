@@ -68,6 +68,7 @@ const Dashboard= (props) =>{
                 </Toolbar>
             </AppBar>
         </Box>
+        <img src="./screen.png" height='640px'/>
         </>
     )
 }
