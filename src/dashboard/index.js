@@ -15,6 +15,7 @@ import Avatar from '@mui/material/Avatar';
 import Modal from '@mui/material/Modal';
 import Login from "../login";
 import { User } from "../context";
+import { SignUp } from "../signUp";
 
 const style = {
     position: 'absolute',
@@ -30,8 +31,8 @@ const style = {
   
 const Dashboard= () =>{
     const [openSidebar, setSideBar] = useState(false);
-    const [openLogin, setOpenLogin] = useState(false)
-    const userDetails = useContext(User);
+    const [openLogin, setOpenLogin] = useState(false);
+    const [openSignUp, setOpenSignUp] = useState(false);
 
     const list = () =>{
         return(
@@ -90,8 +91,14 @@ const Dashboard= () =>{
                 <Button color="inherit">About Us</Button>
                 <Button color="inherit" sx={{paddingRight:'20px'}}>Contact Us</Button>
                 {
-                    JSON.parse(sessionStorage.getItem("user")) !=null && (
+                    JSON.parse(sessionStorage.getItem("user")) !=null ? (
                       <Avatar sx={{ bgcolor: '#ffea00' }}>{JSON.parse(sessionStorage.getItem("user")).userName.slice(0,1)}</Avatar>
+                    ) : (
+                        <Button color="inherit"
+                        onClick={(e)=>setOpenSignUp(true)}
+                        >
+                             Sign Up
+                        </Button>
                     )
                 }
                 <Button color="inherit"
@@ -112,6 +119,18 @@ const Dashboard= () =>{
                 <Login setOpenLogin={setOpenLogin}/>
             </Box>
          </Modal>
+
+         <Modal
+            open={openSignUp}
+            onClose={()=>setOpenSignUp(!openSignUp)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                <SignUp setOpenLogin={setOpenLogin}/>
+            </Box>
+         </Modal>
+         
         <img src="./screen.png" height='640px'/>
         </>
     )
