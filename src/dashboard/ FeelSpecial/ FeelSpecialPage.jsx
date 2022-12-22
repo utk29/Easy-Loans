@@ -18,9 +18,9 @@ const FeelSpecial = () => {
           </div>
           <div className="photo-section-bottom dynamic-margin">
             <div className="photo-section-description">
-              every time you pay your credit card bills on CRED, you receive
-              CRED coins. you can use these to win exclusive rewards or get
-              special access to curated products and experiences. on CRED, good
+              every time you pay your credit card bills on Easy Loans, you receive
+              Easy Loans coins. you can use these to win exclusive rewards or get
+              special access to curated products and experiences. on Easy Loans, good
               begets good.
             </div>
             <div className="photo-section-button">

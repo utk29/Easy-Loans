@@ -7,7 +7,7 @@ const CredStory = () => {
       <div className="max-width flex story-wrapper">
         <div className="flex cred-story-heading-wrapper">
           <div className="cred-story-heading">
-            the story of CRED begins with trust.
+            the story of Easy Loans begins with trust.
           </div>
         </div>
         <div className="cred-story-detail">
@@ -26,7 +26,7 @@ const CredStory = () => {
             because here you are.
           </div>
           <div className="cred-story-para">
-            if you make it to CRED, congratulations and welcome. we have a lot
+            if you make it to Easy Loans, congratulations and welcome. we have a lot
             of things planned for you.
           </div>
         </div>
