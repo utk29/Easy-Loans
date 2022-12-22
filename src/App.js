@@ -5,9 +5,7 @@ import Index from './login';
 function App() {
   return (
     <>
-     <Index/>
-      <Dashboard userName='Mahipal'/>
-    
+      <Dashboard/>
     </>
   );
 }

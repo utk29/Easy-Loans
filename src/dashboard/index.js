@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,16 +12,33 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
-import { deepOrange } from '@mui/material/colors';
+import Modal from '@mui/material/Modal';
+import Login from "../login";
+import { User } from "../context";
 
-const Dashboard= (props) =>{
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  
+const Dashboard= () =>{
     const [openSidebar, setSideBar] = useState(false);
+    const [openLogin, setOpenLogin] = useState(false)
+    const userDetails = useContext(User);
+
     const list = () =>{
         return(
             <Box
                 sx={{ width: 250 }}
                 role="presentation"
-                onClick={console.log(false)}
+                onClick={()=>console.log(false)}
                 >
                 <List>
                     {['Dashboard', 'User Detail'].map((text) => (
@@ -34,6 +51,15 @@ const Dashboard= (props) =>{
                 </List>
             </Box>
         )
+    }
+    const handleOnLoginClick = (user) =>{
+        if(!user){
+            setOpenLogin(true);
+        }else{
+                        //open profile
+
+        }
+
     }
     return(
     <>
@@ -63,11 +89,29 @@ const Dashboard= (props) =>{
                 </Typography>
                 <Button color="inherit">About Us</Button>
                 <Button color="inherit" sx={{paddingRight:'20px'}}>Contact Us</Button>
-                <Avatar sx={{ bgcolor: '#ffea00' }}>{props.userName.slice(0,1)}</Avatar>
-                <Button color="inherit">{props.userName}</Button>
+                {
+                    JSON.parse(sessionStorage.getItem("user")) !=null && (
+                      <Avatar sx={{ bgcolor: '#ffea00' }}>{JSON.parse(sessionStorage.getItem("user")).userName.slice(0,1)}</Avatar>
+                    )
+                }
+                <Button color="inherit"
+                     onClick={(e)=>handleOnLoginClick(JSON.parse(sessionStorage.getItem("user")),e)}
+                     >
+                    {JSON.parse(sessionStorage.getItem("user"))==null? 'Sign in' :  JSON.parse(sessionStorage.getItem("user")).userName}
+                </Button>
                 </Toolbar>
             </AppBar>
         </Box>
+        <Modal
+            open={openLogin}
+            onClose={()=>setOpenLogin(!openLogin)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                <Login setOpenLogin={setOpenLogin}/>
+            </Box>
+         </Modal>
         <img src="./screen.png" height='640px'/>
         </>
     )
