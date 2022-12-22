@@ -1,22 +1,4 @@
-import React, { useContext, useState } from "react"
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
-import Modal from '@mui/material/Modal';
-import Login from "../login";
-import { User } from "../context";
-import { SignUp } from "../signUp";
-import { deepOrange } from '@mui/material/colors';
+import React from "react"
 import HeroSection from "./Herosection";
 import Footer from "./Footer";
 import ProductShowcase from "./ProductShow/ProductShowCase";

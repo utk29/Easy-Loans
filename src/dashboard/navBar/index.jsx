@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -30,31 +30,36 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-export const NavBar = () =>{
+export const NavBar = (props) =>{
     const [openSidebar, setSideBar] = useState(false);
     const [openLogin, setOpenLogin] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
-    const [openDashboard, setDashboard] = useState(false);
+    const [userOpenDashboard, setUserDashboard] = useState(false);
 
     const handleClick = (type) =>{
         if(type === 'Log Out'){
             sessionStorage.removeItem("user")
-        }else{
-
+            props.setRenderScreen('Home');
+        }if(type === 'Dashboard'){
+            setUserDashboard(true);
+            props.setRenderScreen('UserDashboard');
+        }if(type == 'Home'){
+            props.setRenderScreen('Home');
         }
-        setSideBar(false)
+        setSideBar(false);
     }
 
 
     const findItems = () =>{
-        let arr= ['Apply For Easy EMI','Log Out']
+        let arr= ['Home','Apply For Easy EMI']
         let userObj = JSON.parse(sessionStorage.getItem('user'));
         if(userObj.isAdmin){
             arr.push('Adim Dashboard');
         }
-        if(userObj.isVerified){
+       // if(userObj.isVerified){
             arr.push('Dashboard');
-        }
+       // }
+       arr.push('Log Out')
         return arr??[];
     }
     
