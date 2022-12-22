@@ -23,12 +23,30 @@ export const SignUp = (props) =>{
     const userDetails = useContext(User);
      const handleSubmit = (event) => {
     
-        // make api call and set props.setUserDetails
-        props.setOpenLogin(false);
-        userDetails.userData({
-            userName:'abs',
-            email:'222'
-        });
+        const obj = {
+            password:formItem.pass,
+            phone_number:formItem.mobileNumber,
+            email:formItem.email,
+            first_name:formItem.name
+        }
+            fetch('http://192.168.5.57:8000/api/v1/hack/customer/create', {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj),
+              })
+                .then((resp) => {return resp.json()})
+                .then(({ message, data, success }) => {
+                  if (success) {
+                    props.setOpenLogin(false);
+                    userDetails.userData({
+                        userName:obj.first_name,
+                        email:obj.email
+                    });
+                  }
+                })
       };
 
       const onChange = (name,e) =>{
@@ -53,15 +71,15 @@ export const SignUp = (props) =>{
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" sx={{ mt: 3 }}>
+            <Box sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
                     label="Name"
-
-                    name="name"                    autoComplete="family-name"
+                    name="name" 
+                    autoComplete="family-name"
                     value={formItem.name}
                     onChange={(e)=>onChange('name',e)}
                   />

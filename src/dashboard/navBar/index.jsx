@@ -26,7 +26,6 @@ import {
   DialogContentText,
   DialogTitle,
   FormControlLabel,
-  MenuItem,
   Radio,
   TextField,
 } from "@mui/material";
@@ -46,9 +45,8 @@ export const NavBar = (props) => {
   const [openSidebar, setSideBar] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
-  const [openDashboard, setDashboard] = useState(false);
   const [open, setOpen] = useState(false);
-  const [employmentTypeMapping, setEmploymentTypeMapping] = useState([
+  const [employmentTypeMapping] = useState([
     { value: "full_time", label: "Full Time" },
     { value: "part_time", label: "Part Time" },
     { value: "self_employed", label: "Self Time" },
@@ -57,17 +55,17 @@ export const NavBar = (props) => {
   ])
   const [amountFinance, setAmountFinance] = useState("");
   const [annualIncome, setAnnualIncome] = useState("");
-  const [userOpenDashboard, setUserDashboard] = useState(false);
 
     const handleClick = (type) =>{
         if(type === 'Log Out'){
             sessionStorage.removeItem("user")
             props.setRenderScreen('Home');
         }if(type === 'Dashboard'){
-            setUserDashboard(true);
             props.setRenderScreen('UserDashboard');
-        }if(type == 'Home'){
+        }if(type === 'Home'){
             props.setRenderScreen('Home');
+        }if(type === 'Adim Dashboard'){
+            props.setRenderScreen('Adim Dashboard');
         }
         if(type == 'Apply For Easy EMI'){
             setOpen(true)
@@ -79,9 +77,9 @@ export const NavBar = (props) => {
     const findItems = () =>{
         let arr= ['Home','Apply For Easy EMI']
         let userObj = JSON.parse(sessionStorage.getItem('user'));
-        if(userObj.isAdmin){
+       // if(userObj.isAdmin){
             arr.push('Adim Dashboard');
-        }
+      //  }
        // if(userObj.isVerified){
             arr.push('Dashboard');
        // }
@@ -94,7 +92,6 @@ export const NavBar = (props) => {
       <Box
         sx={{ width: 250 }}
         role="presentation"
-        onClick={() => console.log(false)}
       >
         <List>
           {findItems().map((text) => (

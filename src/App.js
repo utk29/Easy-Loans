@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AdminDashboard from './adminDashboard';
 import './App.css';
 import Dashboard from './dashboard';
 import { NavBar } from './dashboard/navBar';
@@ -10,6 +11,9 @@ function App() {
   const comp = () =>{
     if(renderScreen === 'UserDashboard'){
       return <UserDashboard/>
+    }
+    if(renderScreen === 'Adim Dashboard'){
+      return <AdminDashboard/>
     }
  
     return <Dashboard/>
