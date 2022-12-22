@@ -18,7 +18,7 @@ const CredSecurity = () => {
           </div>
           <div className="photo-section-bottom dynamic-margin">
             <div className="photo-section-description">
-              CRED ensures that all your personal data and transactions are
+            Easy Loans ensures that all your personal data and transactions are
               encrypted, and secured so what’s yours remains only yours. there’s
               no room for mistakes because we didn’t leave any.
             </div>

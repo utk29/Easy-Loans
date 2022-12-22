@@ -23,7 +23,7 @@ const HeroSection = () => {
         <div className="hero-subheading">
           join 7.5M+ members who win rewards and cashbacks everyday
         </div>
-        <Button buttonText="Download CRED" />
+        <Button buttonText="Download Easy Loans" />
       </div>
     </div>
   );
