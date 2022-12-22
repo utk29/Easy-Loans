@@ -64,7 +64,7 @@ const Login = (props) => {
             <TextField
               margin="normal"
               fullWidth
-              name="password"
+              required
               label="Password"
               type="password"
               id="password"

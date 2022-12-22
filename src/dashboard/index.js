@@ -49,20 +49,28 @@ const Dashboard= () =>{
     const [openSidebar, setSideBar] = useState(false);
     const [openLogin, setOpenLogin] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
+    const [openDashboard, setDashboard] = useState(false);
+   
+    const handleClick = (type) =>{
+        if(type === 'Log Out'){
+            sessionStorage.removeItem("user")
+        }else{
 
+        }
+        setSideBar(false)
+    }
     const list = () =>{
         return(
-           
             <Box
                 sx={{ width: 250 }}
                 role="presentation"
                 onClick={()=>console.log(false)}
                 >
                 <List>
-                    {['Dashboard', 'Log Out','Apply For Easy EMI'].map((text) => (
+                    {['Dashboard','Apply For Easy EMI','Log Out'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
-                        <ListItemText primary={text} />    
+                        <ListItemText primary={text}  onClick={()=>handleClick(text)}/>    
                         </ListItemButton>
                     </ListItem>
                     ))}

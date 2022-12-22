@@ -40,7 +40,6 @@ export const SignUp = (props) =>{
       }
     return(
         <Container component="main" maxWidth="xs">
-          <CssBaseline />
           <Box
             sx={{
               marginTop: 8,
@@ -61,10 +60,9 @@ export const SignUp = (props) =>{
                   <TextField
                     required
                     fullWidth
-                    id="lastName"
                     label="Name"
-                    name="lastName"
-                    autoComplete="family-name"
+
+                    name="name"                    autoComplete="family-name"
                     value={formItem.name}
                     onChange={(e)=>onChange('name',e)}
                   />
@@ -75,7 +73,6 @@ export const SignUp = (props) =>{
                     fullWidth
                     id="email"
                     label="Email Address"
-                    name="email"
                     autoComplete="email"
                     value={formItem.email}
                     onChange={(e)=>onChange('email',e)}
@@ -85,7 +82,6 @@ export const SignUp = (props) =>{
                   <TextField
                     required
                     fullWidth
-                    name="password"
                     label="Password"
                     type="password"
                     id="password"
@@ -97,7 +93,6 @@ export const SignUp = (props) =>{
                    <Grid item xs={12}>
                    <TextField
                     autoComplete="given-mobileNumber"
-                    name="mobileNumber"
                     required
                     fullWidth
                     id="mobileNumber"
