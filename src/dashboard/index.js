@@ -84,29 +84,31 @@ const Dashboard= () =>{
        <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ backgroundColor:"#101010"}} >
                 <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                    <>
-                    <MenuIcon  onClick={()=>setSideBar(!openSidebar)}/>
-                        <Drawer
-                            anchor={'left'}
-                            open={openSidebar}
-                            onClose={()=>setSideBar(false)}
+                    {
+                        sessionStorage.getItem("user")!=null && (
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
                         >
-                            {list()}
-                        </Drawer>
-                    </>
-                </IconButton>
+                            <>
+                            <MenuIcon  onClick={()=>setSideBar(!openSidebar)}/>
+                                <Drawer
+                                    anchor={'left'}
+                                    open={openSidebar}
+                                    onClose={()=>setSideBar(false)}
+                                >
+                                    {list()}
+                                </Drawer>
+                            </>
+                        </IconButton>
+                        )
+                    }
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Easy Loans
                 </Typography>
-                <Button color="inherit">About Us</Button>
-                <Button color="inherit" sx={{paddingRight:'20px'}}>Contact Us</Button>
                 {
                     JSON.parse(sessionStorage.getItem("user")) !=null ? (
                       <Avatar sx={{ bgcolor: '#ffea00' }}>{JSON.parse(sessionStorage.getItem("user")).userName.slice(0,1)}</Avatar>
