@@ -43,8 +43,10 @@ export const NavBar = (props) =>{
         }if(type === 'Dashboard'){
             setUserDashboard(true);
             props.setRenderScreen('UserDashboard');
-        }if(type == 'Home'){
+        }if(type === 'Home'){
             props.setRenderScreen('Home');
+        }if(type === 'Adim Dashboard'){
+            props.setRenderScreen('Adim Dashboard');
         }
         setSideBar(false);
     }
@@ -53,9 +55,9 @@ export const NavBar = (props) =>{
     const findItems = () =>{
         let arr= ['Home','Apply For Easy EMI']
         let userObj = JSON.parse(sessionStorage.getItem('user'));
-        if(userObj.isAdmin){
+       // if(userObj.isAdmin){
             arr.push('Adim Dashboard');
-        }
+      //  }
        // if(userObj.isVerified){
             arr.push('Dashboard');
        // }
