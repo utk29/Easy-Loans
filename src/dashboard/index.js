@@ -59,12 +59,15 @@ const Dashboard= () =>{
                 onClick={()=>console.log(false)}
                 >
                 <List>
-                    {['Dashboard', 'User Detail'].map((text) => (
+                    {['Dashboard', 'User Detail', 'Apply For Easy EMI'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                         <ListItemText primary={text} />
+                        
                         </ListItemButton>
                     </ListItem>
+
+
                     ))}
                 </List>
             </Box>
