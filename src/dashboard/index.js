@@ -17,10 +17,14 @@ import "../CommonCss/animations.css"
 const Dashboard= () =>{
     return(
     <>
+    <div style={{backgroundColor:"#66b2ed"}}>
         <Header/>
         <HeroSection/>
-        <ProductShowcase/>
-        <FeelSpecial/>
+        </div>
+        <img src="newScreen.png" />
+        
+        {/* <ProductShowcase/> */}
+        {/* <FeelSpecial/>
         <BrandsLove/>
         <CredExperience/>
         <MobileScroll/>
@@ -31,7 +35,7 @@ const Dashboard= () =>{
        
         <CredSecurity/>
         <CredStory/>
-        <AppRating/>
+        <AppRating/> */}
         <Footer/>
         </>
        

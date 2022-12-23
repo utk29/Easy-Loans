@@ -15,13 +15,13 @@ const Header = () => {
         className={`mobile-menu only-mobile ${showMobMenu ? "overlay" : ""}`}
       >
         <div className="mobile-navbar">
-          <div className="mobile-nav-item">credit score check</div>
+          <div className="mobile-nav-item" >credit score check</div>
           <div className="mobile-nav-item">credit card bill payment</div>
         </div>
       </div>
       <div className="max-width flex header">
         <img
-          src="refinancing.png"
+          src="refinance.png"
           className="header-logo"
         />
         <div className="only-mobile mobile-menu-button-wrapper">
@@ -38,8 +38,8 @@ const Header = () => {
           </button>
         </div>
         <div className="non-mobile flex">
-          <div className="header-nav-item">credit score check</div>
-          <div className="header-nav-item">credit card bill payment</div>
+          <div className="header-nav-item" style={{marginLeft:"-58rems" ,fontSize:"25px", fontWeight:"700"}}>EASY LOANS</div>
+          
         </div>
       </div>
     </div>
