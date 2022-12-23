@@ -32,7 +32,7 @@ export const UserDashboard = () => {
       loanId: '320931',
       lender: 'HDFC',
       emiAmount: '404009',
-      easyLoanDueDate: '08/12/2022',
+      easyLoanDueDate: '08/12/2023',
       totalOutStanding: '47383843',
       tenure: '12'
     },
@@ -40,8 +40,19 @@ export const UserDashboard = () => {
       loanId: '332',
       lender: 'HDFC',
       emiAmount: '404009',
-      easyLoanDueDate: '08/12/2022',
+      easyLoanDueDate: '12/01/2023',
       totalOutStanding: '47383843',
+      tenure: '12'
+    }
+  ];
+
+  const pastLoanData = [
+    {
+      loanId: '931',
+      lender: 'IIFL',
+      emiAmount: '345',
+      easyLoanDueDate: '28/12/2022',
+      totalOutStanding: '5554',
       tenure: '12'
     }
   ];
@@ -49,6 +60,10 @@ export const UserDashboard = () => {
   const handleSave = () =>{
     if(edit){
       toast.success("Request Successfully Submit!");
+      setLoader(true);
+      setTimeout(() => {
+        setLoader(false);
+      }, 3000);
     }
     setEdit(!edit)
   }
@@ -155,7 +170,7 @@ export const UserDashboard = () => {
         </div>
 
         {loader ? (
-          <CircularProgress />
+          <CircularProgress  sx={{ marginTop:"20rem", marginLeft:"43rem"}}/>
         ) : (
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -195,7 +210,7 @@ export const UserDashboard = () => {
         <span style={{ fontSize: "20px" }}>Past Loans</span>
 
         {loader ? (
-          <CircularProgress />
+          <CircularProgress sx={{ marginTop:"20rem", marginLeft:"43rem"}}/>
         ) : (
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -210,7 +225,7 @@ export const UserDashboard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {activeLoanData.map((row) => (
+                {pastLoanData.map((row) => (
                   <TableRow
                     key={row.loanId}
                   >

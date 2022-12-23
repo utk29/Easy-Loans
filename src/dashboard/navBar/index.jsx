@@ -69,6 +69,7 @@ export const NavBar = (props) => {
     if (type === "Log Out") {
       sessionStorage.removeItem("user");
       props.setRenderScreen("Home");
+      toast.success('User Logged Out');
     }
     if (type === "Dashboard") {
       props.setRenderScreen("UserDashboard");
@@ -86,13 +87,13 @@ export const NavBar = (props) => {
   };
 
   const findItems = () => {
-    let arr = ["Home", "Apply For Easy EMI"];
+    let arr = ["Home"];
     let userObj = JSON.parse(sessionStorage.getItem("user"));
     if (userObj.is_admin) {
       arr.push("Admin Dashboard");
     }
     if (userObj.is_verify) {
-      arr.push("Dashboard");
+      arr.push("Dashboard","Apply For Easy EMI");
     }
     arr.push("Log Out");
     return arr ?? [];
