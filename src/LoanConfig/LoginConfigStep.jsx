@@ -2,6 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
+import Select from "@mui/material/Select";
+
+import MenuItem from "@mui/material/MenuItem";
+import toast, { Toaster } from "react-hot-toast";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -23,6 +27,7 @@ const steps = ["Select Loans", "Configure", "Review"];
 const LoginConfigStep = ({ modalOpen, modalClose }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [age, setAge] = React.useState("Adhoc");
 
   const totalSteps = () => {
     return steps.length;
@@ -90,7 +95,14 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={() => modalClose(false)}>Done</Button>
+              <Button
+                onClick={() => {
+                  modalClose(false);
+                  toast.success("Loans Saved Successuly!");
+                }}
+              >
+                Done
+              </Button>
             </Box>
           </React.Fragment>
         ) : (
@@ -131,7 +143,8 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                     }}
                   >
                     <FormControlLabel
-                      sx={{ float: "right", marginRight: "-10px" }}
+                      label="Loan1"
+                      sx={{ float: "right" }}
                       control={<Checkbox />}
                     />
                   </Box>
@@ -143,7 +156,8 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                     }}
                   >
                     <FormControlLabel
-                      sx={{ float: "right", marginRight: "-10px" }}
+                      label="Loan2"
+                      sx={{ float: "right" }}
                       control={<Checkbox />}
                     />
                   </Box>
@@ -155,7 +169,8 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                     }}
                   >
                     <FormControlLabel
-                      sx={{ float: "right", marginRight: "-10px" }}
+                      label="Loan3"
+                      sx={{ float: "right" }}
                       control={<Checkbox />}
                     />
                   </Box>
@@ -211,10 +226,10 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                       alignSelf: "center",
                     }}
                   >
-                    Transaction Date:
+                    Transc to Lender:
                   </span>
                   <TextField
-                    sx={{ marginLeft: "15px" }}
+                    sx={{ marginLeft: "42px" }}
                     size="small"
                     label="days before due date"
                     onChange={(e) => e.target.value}
@@ -232,17 +247,45 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                     style={{
                       fontSize: "18px",
                       fontWeight: "500",
-                      alignSelf: "center",
                     }}
                   >
-                    Transaction Date:
+                    Repay To EasyLoans:
                   </span>
                   <TextField
                     sx={{ marginLeft: "15px" }}
                     size="small"
-                    label="days after due date"
+                    label="days before due date"
                     onChange={(e) => e.target.value}
                   />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginTop: "10px",
+                    marginRight: "-2px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "500",
+                      alignSelf: "center",
+                      marginRight: "41px",
+                    }}
+                  >
+                    Refinancing Type:
+                  </span>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    sx={{ minWidth: "200px" }}
+                    onChange={(e) => setAge(e.target.value)}
+                  >
+                    <MenuItem value="AdHoc">AdHoc</MenuItem>
+                    <MenuItem value="Monthly">Monthly</MenuItem>
+                  </Select>
                 </div>
 
                 <div
@@ -313,7 +356,7 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                       marginLeft: "20px",
                     }}
                   >
-                    3{" "}
+                    1{" "}
                   </span>
                 </div>
 
@@ -331,7 +374,7 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                       alignSelf: "center",
                     }}
                   >
-                    Transaction Date
+                    Transc to Lender:
                   </span>
                   <span
                     style={{
@@ -397,7 +440,7 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
                       marginLeft: "20px",
                     }}
                   >
-                    600{" "}
+                    200{" "}
                   </span>
                 </div>
               </Box>
@@ -434,6 +477,7 @@ const LoginConfigStep = ({ modalOpen, modalClose }) => {
           </React.Fragment>
         )}
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </Box>
   );
 };

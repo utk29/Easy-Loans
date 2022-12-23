@@ -46,19 +46,19 @@ const AdminDashboard = () => {
 
   const capitalSplitData = [
     {
-      name: "Capital Lended",
+      name: "Lended",
       uv: 4000,
-      pv: 2400,
+      capital: 2400,
     },
     {
-      name: "Capital Recovered",
+      name: "Recovered",
       uv: 2000,
-      pv: 4798,
+      capital: 4798,
     },
     {
-      name: "Capital Defaulted",
+      name: "Defaulted",
       uv: 2000,
-      pv: 9800,
+      capital: 9800,
     },
   ];
 
@@ -66,22 +66,22 @@ const AdminDashboard = () => {
     {
       name: "North",
       uv: 6000,
-      pv: 4400,
+      capital: 4400,
     },
     {
       name: "South",
       uv: 3000,
-      pv: 1398,
+      capital: 1398,
     },
     {
       name: "East",
       uv: 4000,
-      pv: 6800,
+      capital: 6800,
     },
     {
       name: "West",
       uv: 2000,
-      pv: 9800,
+      capital: 9800,
     },
   ];
 
@@ -202,7 +202,7 @@ const AdminDashboard = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="pv" fill="#6166e9" />
+                <Bar dataKey="capital" fill="#6166e9" />
               </BarChart>
               <span
                 style={{
@@ -239,7 +239,7 @@ const AdminDashboard = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="pv" fill="#6166e9" />
+                <Bar dataKey="capital" fill="#6166e9" />
               </BarChart>
 
               <span
@@ -302,12 +302,12 @@ const AdminDashboard = () => {
         {loader ?  <CircularProgress  sx={{ marginTop:"20rem", marginLeft:"43rem"}}/> : (
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
+              <TableHead sx={{fontWeight:'600'}}>
                 <TableRow>
                   <TableCell >Email</TableCell>
                   <TableCell >Request Id</TableCell>
                   <TableCell >Loan Amount</TableCell>
-                  <TableCell >Applicable Percentage</TableCell>
+                  <TableCell >Confidense Percentage</TableCell>
                   <TableCell >Operation</TableCell>
                   
                 </TableRow>
