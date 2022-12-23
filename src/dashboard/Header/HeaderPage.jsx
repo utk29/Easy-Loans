@@ -38,8 +38,7 @@ const Header = () => {
           </button>
         </div>
         <div className="non-mobile flex">
-          <div className="header-nav-item" style={{marginLeft:"-58rems" ,fontSize:"25px", fontWeight:"700"}}>EASY LOANS</div>
-          
+         
         </div>
       </div>
     </div>

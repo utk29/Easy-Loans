@@ -92,7 +92,7 @@ const Login = (props) => {
               fullWidth
               required
               label="password"
-              type="passwordword"
+              type="password"
               id="passwordword"
               value={formItem.password}
               onChange={(e) => onChange("password", e)}
