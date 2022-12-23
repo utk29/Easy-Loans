@@ -12,7 +12,7 @@ function App() {
     if(renderScreen === 'UserDashboard'){
       return <UserDashboard/>
     }
-    if(renderScreen === 'Adim Dashboard'){
+    if(renderScreen === 'Admin Dashboard'){
       return <AdminDashboard/>
     }
  

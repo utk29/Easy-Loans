@@ -76,8 +76,8 @@ export const NavBar = (props) => {
     if (type === "Home") {
       props.setRenderScreen("Home");
     }
-    if (type === "Adim Dashboard") {
-      props.setRenderScreen("Adim Dashboard");
+    if (type === "Admin Dashboard") {
+      props.setRenderScreen("Admin Dashboard");
     }
     if (type === "Apply For Easy EMI") {
       setOpen(true);
@@ -88,12 +88,21 @@ export const NavBar = (props) => {
   const findItems = () => {
     let arr = ["Home", "Apply For Easy EMI"];
     let userObj = JSON.parse(sessionStorage.getItem("user"));
+<<<<<<< Updated upstream
     if (userObj.is_admin) {
       arr.push("Adim Dashboard");
     }
     if (userObj.is_verify) {
       arr.push("Dashboard");
     }
+=======
+    // if(userObj.isAdmin){
+    arr.push("Admin Dashboard");
+    //  }
+    // if(userObj.isVerified){
+    arr.push("Dashboard");
+    // }
+>>>>>>> Stashed changes
     arr.push("Log Out");
     return arr ?? [];
   };
