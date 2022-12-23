@@ -48,7 +48,7 @@ const AdminDashboard = () => {
     {
       name: "Lended",
       uv: 4000,
-      capital: 2400,
+      capital: 12400,
     },
     {
       name: "Recovered",
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
     {
       name: "Defaulted",
       uv: 2000,
-      capital: 9800,
+      capital: 900,
     },
   ];
 
