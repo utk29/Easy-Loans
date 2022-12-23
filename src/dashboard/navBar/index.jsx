@@ -33,6 +33,8 @@ import {
   TextField,
 } from "@mui/material";
 
+import LoginConfigStep from "../../LoanConfig/LoginConfigStep";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -59,9 +61,9 @@ export const NavBar = (props) => {
   const [amountFinance, setAmountFinance] = useState("");
   const [annualIncome, setAnnualIncome] = useState("");
   const [employmentType, setEmploymentType] = useState("Full Time");
+  const [loanConfigModalOpen, setLoanConfigModalOpen] = useState(false);
 
   useEffect(() => {
-    
     setFlag(!flag);
   }, [openLogin, openSignUp]);
 
@@ -82,6 +84,10 @@ export const NavBar = (props) => {
     if (type === "Apply For Easy EMI") {
       setOpen(true);
     }
+
+    if (type === "Loan Config") {
+      setLoanConfigModalOpen(true);
+    }
     setSideBar(false);
   };
 
@@ -92,7 +98,7 @@ export const NavBar = (props) => {
       arr.push("Admin Dashboard");
     }
     if (userObj.is_verify) {
-      arr.push("Dashboard");
+      arr.push("Dashboard", "Loan Config");
     }
     arr.push("Log Out");
     return arr ?? [];
@@ -240,6 +246,16 @@ export const NavBar = (props) => {
       >
         <Box sx={style}>
           <SignUp setOpenLogin={setOpenSignUp} />
+        </Box>
+      </Modal>
+
+      <Modal
+        open={loanConfigModalOpen}
+        onClose={() => setLoanConfigModalOpen(false)}
+        sx={{minWidth:"800", minHeight:"400px"}}
+      >
+        <Box sx={style}>
+          <LoginConfigStep modalOpen={loanConfigModalOpen} modalClose={setLoanConfigModalOpen} />
         </Box>
       </Modal>
 
