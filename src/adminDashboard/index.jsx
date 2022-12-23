@@ -107,7 +107,7 @@ const AdminDashboard = () => {
       (
         <>
       <div style={{ display: "flex", flexDirection: "row", marginTop: "40px", justifyContent:"space-between", padding:"10px 72px" }}>
-        <Paper elevation={24} style={{ display: "flex", flexDirection: "column", rowGap:"85px", marginTop:"44px" }}>
+        <Paper elevation={24} style={{ display: "flex", flexDirection: "column", rowGap:"85px", marginTop:"44px", padding:"30px 140px" }}>
           <GaugeChart
             animate={true}
             nrOfLevels={420}
@@ -127,7 +127,7 @@ const AdminDashboard = () => {
           </span>
         </Paper>
 
-        <Paper elevation={24} style={{ display: "flex", flexDirection: "column" }}>
+        <Paper elevation={24} style={{ display: "flex", flexDirection: "column", padding:"24px 80px" }}>
           <BarChart width={430} height={280} data={capitalSplitData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
@@ -145,7 +145,7 @@ const AdminDashboard = () => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "row", marginTop: "40px",justifyContent:"space-between", padding:"10px 72px" }}>
-        <Paper elevation={24} style={{ display: "flex", flexDirection: "column" }}>
+        <Paper elevation={24} style={{ display: "flex", flexDirection: "column", padding:"15px 76px" }}>
           <BarChart width={430} height={280} data={regionWiseRecovery}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
@@ -166,7 +166,7 @@ const AdminDashboard = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            marginTop: "-140px",
+            padding:"20px 80px"
           }}
         >
           <PieChart width={400} height={400}>

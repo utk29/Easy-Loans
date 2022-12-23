@@ -19,7 +19,7 @@ const Login = (props) => {
   const userDetails = useContext(User);
 
   const handleSubmit = () => {
-    debugger;
+    
     fetch("https:p3-api.dev.credgenics.com/payment/public/user/login", {
       method: "POST",
       headers: {

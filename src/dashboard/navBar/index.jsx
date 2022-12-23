@@ -61,7 +61,7 @@ export const NavBar = (props) => {
   const [employmentType, setEmploymentType] = useState("Full Time");
 
   useEffect(() => {
-    debugger;
+    
     setFlag(!flag);
   }, [openLogin, openSignUp]);
 
