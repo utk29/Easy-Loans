@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import GaugeChart from "react-gauge-chart";
 
@@ -107,7 +107,7 @@ const AdminDashboard = () => {
       (
         <>
       <div style={{ display: "flex", flexDirection: "row", marginTop: "40px", justifyContent:"space-between", padding:"10px 72px" }}>
-        <div style={{ display: "flex", flexDirection: "column", rowGap:"85px", marginTop:"44px" }}>
+        <Paper elevation={24} style={{ display: "flex", flexDirection: "column", rowGap:"85px", marginTop:"44px" }}>
           <GaugeChart
             animate={true}
             nrOfLevels={420}
@@ -125,9 +125,9 @@ const AdminDashboard = () => {
           >
             Recovery Probability
           </span>
-        </div>
+        </Paper>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <Paper elevation={24} style={{ display: "flex", flexDirection: "column" }}>
           <BarChart width={430} height={280} data={capitalSplitData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
@@ -141,11 +141,11 @@ const AdminDashboard = () => {
           >
             Capital Split
           </span>
-        </div>
+        </Paper>
       </div>
 
       <div style={{ display: "flex", flexDirection: "row", marginTop: "40px",justifyContent:"space-between", padding:"10px 72px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <Paper elevation={24} style={{ display: "flex", flexDirection: "column" }}>
           <BarChart width={430} height={280} data={regionWiseRecovery}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
@@ -160,9 +160,9 @@ const AdminDashboard = () => {
           >
             Region Wise Recovery
           </span>
-        </div>
+        </Paper>
 
-        <div
+        <Paper elevation={24}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -196,7 +196,7 @@ const AdminDashboard = () => {
           >
             Refinancing Type
           </span>
-        </div>
+        </Paper>
       </div>
       </>
       )
