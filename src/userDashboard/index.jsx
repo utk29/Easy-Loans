@@ -12,9 +12,14 @@ import {
   TextField,
 } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
+import Switch from '@mui/material/Switch';
+import toast, { Toaster } from "react-hot-toast";
 import React, { useEffect, useState } from "react";
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
 export const UserDashboard = () => {
   const [loader, setLoader] = useState(true);
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,14 +27,6 @@ export const UserDashboard = () => {
     }, 3000);
   }, []);
 
-  const activeLoansHeader = [
-    "Loan",
-    "Lender",
-    "EMI Amount",
-    "EasyLoan Due Date",
-    "Total outstanding amount",
-    "Tenure(months)",
-  ];
   const activeLoanData = [
     {
       loanId: '320931',
@@ -49,8 +46,14 @@ export const UserDashboard = () => {
     }
   ];
 
+  const handleSave = () =>{
+    if(edit){
+      toast.success("Request Successfully Submit!");
+    }
+    setEdit(!edit)
+  }
   return (
-    <>
+    <div style={{'margin':'20px'}}>
       <h1>Dashboard</h1>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div>
@@ -144,8 +147,9 @@ export const UserDashboard = () => {
           }}
         >
           <span style={{ fontSize: "20px" }}>Active Loans</span>
-          <Button sx={{ position: "fixed", right: "22px" }} variant="outlined">
-            Edit
+          <Button sx={{ position: "fixed", right: "22px" }} variant="outlined"
+          onClick={()=>handleSave()}>
+           {edit ?  'Save'  :'Edit'}
           </Button>
           <span> </span>
         </div>
@@ -163,6 +167,8 @@ export const UserDashboard = () => {
                   <TableCell align="right">EasyLoan Due Date</TableCell>
                   <TableCell align="right">Total outstanding amount</TableCell>
                   <TableCell align="right">Tenure(months)</TableCell>
+                 { edit && <TableCell align="right">Status</TableCell>}
+                  
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -176,6 +182,7 @@ export const UserDashboard = () => {
                     <TableCell align="right">{row.easyLoanDueDate}</TableCell>
                     <TableCell align="right">{row.totalOutStanding}</TableCell>
                     <TableCell align="right">{row.tenure}</TableCell>
+                    {edit  &&  <TableCell align="right"> <Switch {...label} defaultChecked /></TableCell>}
                   </TableRow>
                 ))}
               </TableBody>
@@ -220,6 +227,7 @@ export const UserDashboard = () => {
           </TableContainer>
         )}
       </div>
-    </>
+      <Toaster position="top-center" reverseOrder={false} />
+    </div>
   );
 };

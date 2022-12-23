@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -46,6 +46,7 @@ const style = {
 };
 export const NavBar = (props) => {
   const [openSidebar, setSideBar] = useState(false);
+  const [flag, setFlag] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [open, setOpen] = useState(false);
@@ -58,6 +59,11 @@ export const NavBar = (props) => {
   const [amountFinance, setAmountFinance] = useState("");
   const [annualIncome, setAnnualIncome] = useState("");
   const [employmentType, setEmploymentType] = useState("Full Time");
+
+  useEffect(() => {
+    debugger;
+    setFlag(!flag);
+  }, [openLogin, openSignUp]);
 
   const handleClick = (type) => {
     if (type === "Log Out") {
@@ -82,12 +88,12 @@ export const NavBar = (props) => {
   const findItems = () => {
     let arr = ["Home", "Apply For Easy EMI"];
     let userObj = JSON.parse(sessionStorage.getItem("user"));
-    // if(userObj.isAdmin){
-    arr.push("Adim Dashboard");
-    //  }
-    // if(userObj.isVerified){
-    arr.push("Dashboard");
-    // }
+    if (userObj.is_admin) {
+      arr.push("Adim Dashboard");
+    }
+    if (userObj.is_verify) {
+      arr.push("Dashboard");
+    }
     arr.push("Log Out");
     return arr ?? [];
   };
@@ -131,8 +137,29 @@ export const NavBar = (props) => {
       pan_url: "pan.com",
       income_proof: "incom.com",
     };
-    setOpen(false);
-    toast.success('Request Successfully Submit!')
+
+    fetch("https://p3-api.dev.credgenics.com/payment/public/form_data", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then(({ message, data, success }) => {
+        if (success) {
+          toast.success("Request Successfully Submit!");
+          setOpen(false);
+        } else {
+          toast.error(message);
+        }
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   const handleRadioButton = (e) => {
@@ -212,7 +239,7 @@ export const NavBar = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <SignUp setOpenLogin={setOpenLogin} />
+          <SignUp setOpenLogin={setOpenSignUp} />
         </Box>
       </Modal>
 

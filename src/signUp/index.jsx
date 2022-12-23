@@ -12,7 +12,8 @@ import Container from '@mui/material/Container';
 import { Copyright } from '../Copyright';
 import { useContext, useState } from 'react';
 import { User } from '../context';
-  
+import toast, { Toaster } from "react-hot-toast";
+
 export const SignUp = (props) =>{
     const [formItem, setFormItem] = useState({
         name:'',
@@ -22,32 +23,39 @@ export const SignUp = (props) =>{
     });
     const userDetails = useContext(User);
      const handleSubmit = (event) => {
-    
+      props.setOpenLogin(false);
         const obj = {
             password:formItem.pass,
             phone_number:formItem.mobileNumber,
             email:formItem.email,
-            first_name:formItem.name
+            name:formItem.name
         }
-            fetch('http://192.168.5.57:8000/api/v1/hack/customer/create', {
+            fetch('https://p3-api.dev.credgenics.com/payment/public/user/signup', {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify(obj),
-              })
-                .then((resp) => {return resp.json()})
+              }).then((resp) => {return resp.json()})
                 .then(({ message, data, success }) => {
                   if (success) {
                     props.setOpenLogin(false);
                     userDetails.userData({
                         userName:obj.first_name,
                         email:obj.email,
+                        id:data?.user_id,
                         phoneNumber:obj.phone_number
                     });
+                  }else{
+                    toast.error(message)
                   }
+                }).catch((err)=>{
+                    toast.error(err)
+                }).finally(()=>{
+                  props.setOpenLogin(false);
                 })
+                props.setOpenLogin(false);
       };
 
       const onChange = (name,e) =>{
@@ -56,7 +64,9 @@ export const SignUp = (props) =>{
             [name]:e.target.value
           })
       }
+      
     return(
+        <>
         <Container component="main" maxWidth="xs">
           <Box
             sx={{
@@ -147,5 +157,7 @@ export const SignUp = (props) =>{
           </Box>
           <Copyright sx={{ mt: 5 }} />
         </Container>
+        <Toaster position="top-center" reverseOrder={false} />
+        </>
     )
 }
